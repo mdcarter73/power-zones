@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.myapp.mobile" version="2.25" xmlns="http://www.w3.org/ns/widgets">
-  <name>My Amazing App</name>
-  <description>Power Zones</description>
-  <author email="info@myapp.com" href="http://www.myapp.com">A simple app to calculate and display power zones.</author>
+  <name>Power Zones</name>
+  <description>A simple app to calculate and display power zones.</description>
+  <author email="mdcarter@gmail.com" href="">Matt Carter</author>
   <preference name="phonegap-version" value="cli-6.3.0" />
   <preference name="permissions" value="none" />
   <preference name="orientation" value="portrait" />
