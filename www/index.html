@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en">
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"  crossorigin="anonymous">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+<title>Power Zone Calculator</title>
+<style>
+body {
+    margin: 0px 10px;
+}
+caption {
+    caption-side: top;
+}
+	.table tr  { border-bottom: 1px solid #dee2e6; }
+.table td, .table th {
+    padding: .5rem;
+  
+    border: 0;
+}
+.table thead th {
+    border-bottom: 0;
+    font-size: 1.2em;
+}
+.target {
+    font-size: 2em;
+}
+
+thead {
+    background-color: rgb(128,128,128);
+    padding-left: 40px;
+    color: #fff;
+}
+#zonechart .pz {
+    border-left: 20px solid rgb(128,128,128);
+}
+#zonechart .pz1 {
+    border-left: 20px solid #fff;
+}
+#zonechart .pz2 {
+    border-left: 20px solid rgba(255,0,0,.1);
+}
+#zonechart .pz3 {
+    border-left: 20px solid rgba(255,0,0,.2);
+}
+#zonechart .pz4 {
+    border-left: 20px solid rgba(255,0,0,.4);
+}
+#zonechart .pz5 {
+    border-left: 20px solid rgba(255,0,0,.6);
+}
+#zonechart .pz6 {
+    border-left: 20px solid rgba(255,0,0,.75);
+}
+#zonechart .pz7 {
+    border-left: 20px solid rgba(255,0,0,1);
+}
+</style>
+</head>
+<body>
+	
+	
+	
+	
+<div class="modal fade" tabindex="-1" role="dialog" id="ftpinput">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+       
+        <h4 class="modal-title">Peloton Power Zones</h4>
+		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      </div>
+      <div class="modal-body">
+         <form role="form" id="power-zone-form" method="post">
+          <div class="form-group">
+            <label  class="control-label"
+                              for="average-output">20 minute average outpu </label>
+            <input type="number" class="form-control"
+                id="average-output" placeholder="Average output">
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+ 
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->	
+	
+	
+	
+<main>
+  <table class="table" id="zonechart">
+	  
+    <caption>
+    <h1 class="h4">YOUR POWER ZONES <span class="fa fa-cog fa-pull-right" data-toggle="modal" data-target="#ftpinput"> </span></h1>
+    <p> Average Ouptput: <span id="avg">_</span> - 5% = FTP: <span id="ftp">_</span> </p>
+    </caption>
+	  <colgroup>
+		  <col id="powerzones"/>
+		  <col id="ftppercent" class="d-none d-md-block"/>
+		  <col id="targetoutput"/>
+	  </colgroup>
+    <thead>
+      <tr>
+        <th class="pz"  scope="col">Zone/Difficulty</th>
+        <th class="percent d-none d-md-block" scope="col">% of FTP</th>
+        <th scope="col">Your Target Output</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th class="pz1" scope="row">Zone 1 <br>
+          Very Easy</th>
+        <td class="percent d-none d-md-block">&lt;55% of FTP <br>
+          Active recovery intensity</td>
+        <td class="target" id="zone1"></td>
+      </tr>
+      <tr>
+        <th class="pz2" scope="row">Zone 2 <br>
+          Moderate</th>
+        <td class="percent d-none d-md-block">&lt;55% of FTP <br>
+          Long ride pace, Conversational intensity</td>
+        <td class="target" id="zone2"></td>
+      </tr>
+      <tr>
+        <th class="pz3" scope="row">Zone 3 <br>
+          Sustainable</th>
+        <td class="percent d-none d-md-block">&lt;55% of FTP <br>
+          Sustainable for well over an hour,
+          Conversation becomes difficult</td>
+        <td class="target" id="zone3"></td>
+      </tr>
+      <tr>
+        <th class="pz4" scope="row">Zone 4 <br>
+          Challenging</th>
+        <td class="percent d-none d-md-block">&lt;55% of FTP <br>
+          Sustainable for about one hour at max</td>
+        <td class="target" id="zone4"></td>
+      </tr>
+      <tr>
+        <th class="pz5" scope="row">Zone 5 <br>
+          Hard</th>
+        <td class="percent d-none d-md-block">&lt;55% of FTP <br>
+          Sustainable for 10-15 minutes at max</td>
+        <td class="target" id="zone5"></td>
+      </tr>
+      <tr>
+        <th class="pz6" scope="row">Zone 6 <br>
+          Very Hard</th>
+        <td class="percent d-none d-md-block">&lt;55% of FTP <br>
+          Sustainable for 30 seconds up to 3-5
+          minutes max</td>
+        <td class="target" id="zone6"></td>
+      </tr>
+      <tr>
+        <th class="pz7" scope="row">Zone 7 <br>
+          Max Effort</th>
+        <td class="percent d-none d-md-block">&lt;55% of FTP <br>
+          Sustainable for only a few seconds</td>
+        <td class="target" id="zone7"></td>
+      </tr>
+    </tbody>
+  </table>
+</main>
+
+<!-- Optional JavaScript --> 
+<!-- jQuery first, then Popper.js, then Bootstrap JS --> 
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script> 
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" crossorigin="anonymous"></script> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script> 
+<script type="text/javascript">
+
+
+$(document).ready(function() {
+
+
+			var output = localStorage.getItem("avg-output"); 
+			if (output) {
+				$( "#average-output" ).val(output);
+				processFTP();
+			}else {
+				$('#ftpinput').modal('show');
+			}	
+
+			function getPercentage(ftp, pct) {
+				var value = ftp * (pct / 100);
+				return Math.round(value); // * 100) / 100
+			}
+
+			$('#power-zone-form').submit(function(evt) {
+				evt.preventDefault();
+				processFTP();
+			});
+			function processFTP() {	
+				var averageOutput = $('#average-output').val();
+				localStorage.setItem("avg-output", averageOutput);
+				if(_.isEmpty(averageOutput)) {
+					alert('must provide average output.');
+					return;
+				}
+        			$('#ftpinput').modal('hide');
+
+				if(_.isString(averageOutput)) {
+					averageOutput = parseInt(averageOutput);
+          				$("#avg").html(averageOutput);
+				}
+
+				if(!_.isNumber(averageOutput) || _.isNaN(averageOutput)) {
+					alert('must provide average output as number.');
+					return;
+				}
+
+				// # FTP is 95% of the 20 minute average output
+				var ftp = getPercentage(averageOutput, 95); // * 95 / 100;
+        $("#ftp").html(ftp);
+
+				// # Determine Zone 1 (55% of FTP)
+				var zoneOne = getPercentage(ftp, 55);
+        $("#zone1").html('&lt;' + zoneOne);
+
+				// # Determine Zone 2 (56-75% of FTP)
+				var zoneTwoStart = zoneOne + 1;
+				var zoneTwoEnd = getPercentage(ftp, 75);
+        $("#zone2").html(zoneTwoStart + " - " + zoneTwoEnd);
+
+				// # Determine Zone 3 (76-90% of FTP)
+				var zoneThreeStart = zoneTwoEnd + 1;
+				var zoneThreeEnd = getPercentage(ftp, 90);
+        $("#zone3").html(zoneThreeStart + " - " + zoneThreeEnd);
+
+				// # Determine Zone 4 (91-105% of FTP)
+				var zoneFourStart = zoneThreeEnd + 1;
+				var zoneFourEnd = getPercentage(ftp, 105);        
+        $("#zone4").html(zoneFourStart + " - " + zoneFourEnd);
+
+				// # Determine Zone 5 (106-120% of FTP)
+				var zoneFiveStart = zoneFourEnd + 1;
+				var zoneFiveEnd = getPercentage(ftp, 120);
+        $("#zone5").html(zoneFiveStart + " - " + zoneFiveEnd);
+
+				// # Determine Zone 6 (121-150% of FTP)
+				var zoneSixStart = zoneFiveEnd + 1;
+				var zoneSixEnd = getPercentage(ftp, 150);
+        $("#zone6").html(zoneSixStart + " - " + zoneSixEnd);
+
+				// # Determine Zone 7 (151% of FTP)
+				var zoneSeven = zoneSixEnd + 1;
+        $("#zone7").html('&gt;'+zoneSeven);
+
+			};
+		});
+
+	</script>
+</body>
+</html>
